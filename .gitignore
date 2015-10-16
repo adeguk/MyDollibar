@@ -1,0 +1,20 @@
+htdocs/conf/conf.php
+htdocs/conf/conf.php.old
+documents/
+custom2/
+test/report/
+nbproject
+default.properties
+.settings/
+.buildpath
+.gitmodules
+dolibarr_install.log
+upgrade.log
+doxygen_warnings.log
+/.project
+.DS_Store
+.idea
+*.iml
+Thumbs.db
+# Vagrant generated files
+.vagrant

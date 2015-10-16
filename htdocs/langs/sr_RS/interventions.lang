@@ -1,0 +1,67 @@
+# Dolibarr language file - Source file is en_US - interventions
+Intervention=Intervencija
+Interventions=Intervencije
+InterventionCard=Kartica intervencije
+NewIntervention=Nova intervencija
+AddIntervention=Kreiraj intervenciju
+ListOfInterventions=Lista intervencija
+EditIntervention=Izmeni intervenciju
+ActionsOnFicheInter=Akcije intervencije
+LastInterventions=Poslednjih %s intervencija
+AllInterventions=Sve intrvencije
+CreateDraftIntervention=Kreiraj draft
+CustomerDoesNotHavePrefix=Klijent nema prefiks
+InterventionContact=Kontakt za intervenciju
+DeleteIntervention=Obriši intervenciju
+ValidateIntervention=Odbri intervenciju
+ModifyIntervention=Izmeni intervenciju
+DeleteInterventionLine=Obriši liniju intervencije
+ConfirmDeleteIntervention=Da li ste sigurni da želite da obrišete ovu intervenciju ?
+ConfirmValidateIntervention=Da li ste sigurni da želite da dobrite intervenciju sa nazivom <b>%s</b> ?
+ConfirmModifyIntervention=Da li ste sigurni da želite da izmenite ovu intervenciju ?
+ConfirmDeleteInterventionLine=Da li ste sigurni da želite da obrišete ovu liniju intervencije =
+NameAndSignatureOfInternalContact=Ime i potpis osobe koja interveniše :
+NameAndSignatureOfExternalContact=Ime i potpis klijenta :
+DocumentModelStandard=Standardni model dokumenta za intervencije
+InterventionCardsAndInterventionLines=Intervencije i linije intervencija
+InterventionClassifyBilled=Označi "Naplaćeno"
+InterventionClassifyUnBilled=Classify "Unbilled"
+StatusInterInvoiced=Naplaćeno
+RelatedInterventions=Povezane intervencije
+ShowIntervention=Prikaži intervenciju
+SendInterventionRef=Predaja intervencije %s
+SendInterventionByMail=Pošalji intervenciju mailom
+InterventionCreatedInDolibarr=Intervencija %s je kreirana
+InterventionValidatedInDolibarr=Intervencija %s je odobrena
+InterventionModifiedInDolibarr=Intervencija %s je izmenjena
+InterventionClassifiedBilledInDolibarr=Intervencija %s je označena kao plaćena
+InterventionClassifiedUnbilledInDolibarr=Intervention %s set as unbilled
+InterventionSentByEMail=Intervencija %s je poslata mailom
+InterventionDeletedInDolibarr=Intervencija %s je obrisana
+SearchAnIntervention=Potraži intervenciju
+InterventionsArea=Interventions area
+DraftFichinter=Draft interventions
+LastModifiedInterventions=Last %s modified interventions
+##### Types de contacts #####
+TypeContact_fichinter_internal_INTERREPFOLL=Osoba koja prati intervenciju
+TypeContact_fichinter_internal_INTERVENING=Osoba koja interveniše
+TypeContact_fichinter_external_BILLING=Kontakt klijenta za plaćanje
+TypeContact_fichinter_external_CUSTOMER=Kontakt klijenta koji prat intervenciju
+# Modele numérotation
+ArcticNumRefModelDesc1=Model generičkog broja
+ArcticNumRefModelError=Neuspela aktivacija
+PacificNumRefModelDesc1=Return numero with format %syymm-nnnn where yy is year, mm is month and nnnn is a sequence with no break and no return to 0
+PacificNumRefModelError=An intervention card starting with $syymm already exists and is not compatible with this model of sequence. Remove it or rename it to activate this module.
+PrintProductsOnFichinter=Štampaj proizvode sa kartice intervencije
+PrintProductsOnFichinterDetails=Intervencije generisane iz narudžbina
+##### Exports #####
+InterId=Intervention id
+InterRef=Intervention ref.
+InterDateCreation=Date creation intervention
+InterDuration=Duration intervention
+InterStatus=Status intervention
+InterNote=Note intervention
+InterLineId=Line id intervention
+InterLineDate=Line date intervention
+InterLineDuration=Line duration intervention
+InterLineDesc=Line description intervention

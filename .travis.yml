@@ -1,0 +1,148 @@
+# This script is used by Travis CI to run automatically Continuous test integration
+# from Dolibarr GitHub repository.
+# Command run is phpunit
+# For syntax, see http://about.travis-ci.org/docs/user/languages/php/
+
+notifications:
+  email:
+    on_success: never # [always|never|change] default: change
+    on_failure: change # [always|never|change] default: always
+    
+addons:
+  postgresql: "9.3"
+
+services:
+ - memcached # will start memcached
+
+# This will tell travis to run phpunit
+language: php
+php:
+# - "5.2" is not supported because pyrus to install PHP_Codesniffer is not available
+ - 5.3
+ - 5.4
+ - 5.5 
+ - 5.6
+ - 7.0
+
+matrix:
+  allow_failures:
+    - php: 7.0
+
+env:
+ - DB=mysql
+# - DB=postgres  
+
+before_script: 
+ - echo Start travis
+ - echo Current dir is `pwd`
+ - echo Home dir is `echo ~`
+ - export PHPV=`phpenv version-name`
+ - echo PHP version $PHPV 
+# - echo Update composer
+# - ~/.phpenv/versions/$(phpenv version-name)/bin/composer.phar self-update 
+ - echo PHPUnit version
+ - which phpunit
+ - phpunit --version
+ - echo Install phpcs then show installed rules
+ - pyrus install pear/PHP_CodeSniffer
+ - phpenv rehash
+ - which phpcs
+ - phpcs --version
+ - phpcs -i
+ - echo Create dir $(pwd)/htdocs/documents
+ - sudo mkdir -p $(pwd)/htdocs/documents/admin/temp;
+ - sudo touch $(pwd)/htdocs/documents/dolibarr.log;
+ - sudo chmod a+rwx /home; sudo chmod a+rwx /home/travis; sudo chmod -R a+rwx /home/travis/build;
+ - sudo chmod -R a+rwx $(pwd);
+ - sudo chown -R www-data:travis $(pwd)/htdocs/documents;
+ - find $(pwd)/htdocs/documents -type d -exec ls -alt {} \;
+ - echo Edit php.ini file
+ - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+# - echo "extension = memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+ - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+ - sh -c "if [ '$PHPV' = '5.3' ]; then echo 'extension = apc.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi"
+ - sh -c "if [ '$PHPV' = '5.4' ]; then echo 'extension = apc.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi"
+ - sh -c "if [ '$PHPV' = '5.3' ]; then echo 'zend_extension_ts = xdebug.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi"
+ - sh -c "if [ '$PHPV' = '5.4' ]; then echo 'zend_extension_ts = xdebug.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi"
+ - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+ - echo Mysql version
+ # INSTALL MYSQL 5.6
+ # (https://github.com/piwik/piwik/commit/20bd2e1c24e5d673dce3feb256204ad48c29f160)
+ # TODO: Remove when mysql 5.6 is provided by travis.
+ # Otherwise, our migrations will raise a syntax error.
+ - "sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5"
+ - "sudo apt-get autoremove"
+ - "sudo apt-get install libaio1"
+ - "wget -O mysql-5.6.14.deb http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.14-debian6.0-x86_64.deb/from/http://cdn.mysql.com/"
+ - "sudo dpkg -i mysql-5.6.14.deb"
+ - "sudo cp /opt/mysql/server-5.6/support-files/mysql.server /etc/init.d/mysql.server"
+ - "sudo ln -s /opt/mysql/server-5.6/bin/* /usr/bin/"
+ - "sudo sed -i'' 's/table_cache/table_open_cache/' /etc/mysql/my.cnf"
+ - "sudo sed -i'' 's/log_slow_queries/slow_query_log/' /etc/mysql/my.cnf"
+ - "sudo sed -i'' 's/basedir[^=]\\+=.*$/basedir = \\/opt\\/mysql\\/server-5.6/' /etc/mysql/my.cnf"
+ - "sudo /etc/init.d/mysql.server start"
+ - mysql --version
+ - mysql -e "SELECT VERSION();"
+ # /END MYSQL 5.6- mysql --version
+ - echo Init database
+ - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS myapp_test;' -U postgres; fi"
+ - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE myapp_test;' -U postgres; fi"
+ - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'DROP DATABASE IF EXISTS myapp_test;'; fi"
+ - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE IF NOT EXISTS myapp_test;'; fi"
+ - sh -c "if [ '$DB' = 'mysql' ]; then mysql -D myapp_test < $(pwd)/dev/initdata/mysqldump_dolibarr_3.5.0.sql; fi"
+ - echo Create config file htdocs/conf/conf.php
+ - echo '<?php ' > htdocs/conf/conf.php
+ - sh -c "if [ '$DB' = 'pgsql' ]; then echo '$'dolibarr_main_db_type=\'pgsql\'';' >> htdocs/conf/conf.php; fi"
+ - sh -c "if [ '$DB' = 'mysql' ]; then echo '$'dolibarr_main_db_type=\'mysqli\'';' >> htdocs/conf/conf.php; fi"
+ - echo '$'dolibarr_main_url_root=\'http://localhost/\'';' >> htdocs/conf/conf.php
+ - echo '$'dolibarr_main_document_root=\'$(pwd)/htdocs\'';' >> htdocs/conf/conf.php
+ - echo '$'dolibarr_main_data_root=\'$(pwd)/htdocs/documents\'';' >> htdocs/conf/conf.php
+ - echo '$'dolibarr_main_db_host=\'localhost\'';' >> htdocs/conf/conf.php
+ - echo '$'dolibarr_main_db_name=\'myapp_test\'';' >> htdocs/conf/conf.php
+ - echo '$'dolibarr_main_db_user=\'travis\'';' >> htdocs/conf/conf.php
+ - echo '$'dolibarr_main_authentication=\'dolibarr\'';' >> htdocs/conf/conf.php
+ - echo '?>' >> htdocs/conf/conf.php
+ - echo Show conf.php content
+ - cat htdocs/conf/conf.php
+ - echo Install apache server
+ - sudo apt-get update
+ - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-pgsql php5-intl
+ - sudo sed -i -e "s,/var/www,$(pwd)/htdocs,g" /etc/apache2/sites-available/default
+ - echo Show default virtual host
+ - sudo cat /etc/apache2/sites-available/default
+ - sudo /etc/init.d/apache2 restart
+ - wget http://localhost/
+ - sudo cat /etc/apache2/envvars
+ - sudo cat /var/log/apache2/error.log
+ - cat index.html
+
+
+
+script: 
+ - cd htdocs/install
+ - date
+# - php upgrade.php 3.4.0 3.5.0 ignoredbversion > upgrade340350.log
+# - php upgrade2.php 3.4.0 3.5.0 ignoredbversion > upgrade340350-2.log
+ - php upgrade.php 3.5.0 3.6.0 ignoredbversion > upgrade350360.log
+ - php upgrade2.php 3.5.0 3.6.0 ignoredbversion > upgrade350360-2.log
+ - php upgrade.php 3.6.0 3.7.0 ignoredbversion > upgrade360370.log
+ - php upgrade2.php 3.6.0 3.7.0 ignoredbversion > upgrade360370-2.log
+ - php upgrade.php 3.7.0 3.8.0 ignoredbversion > upgrade370380.log
+# - cat upgrade370380.log
+ - php upgrade2.php 3.7.0 3.8.0 ignoredbversion > upgrade370380-2.log
+ - php upgrade.php 3.8.0 3.9.0 ignoredbversion > upgrade380390.log
+ - php upgrade2.php 3.8.0 3.9.0 ignoredbversion > upgrade380390-2.log
+# - cat upgrade370380-2.log
+ - cd ../..
+ - date
+ - phpunit -d memory_limit=-1 --configuration test/phpunit/phpunittest.xml test/phpunit/AllTests.php
+ - date
+# - phpcs -p --warning-severity=0 -s --report-summary --standard=dev/codesniffer/ruleset.xml --tab-width=4 --ignore=/build/html/,/dev/vagrant/,/documents/,/includes/,/test/report/ htdocs/core/class/dolgraph.class.php 2>&1
+ - phpcs -p --warning-severity=0 -s --report-checkstyle --report-summary --standard=dev/codesniffer/ruleset.xml --tab-width=4 --ignore=/htdocs/conf/conf.php,/build/html/,/dev/vagrant/,/documents/,/includes/,/test/report/ . 2>&1
+ - date
+
+after_script:
+# - echo Output dolibarr log file; cat $(pwd)/htdocs/documents/dolibarr.log
+ - echo Output apache log file; sudo cat /var/log/apache2/error.log
+ - echo End travis
+
