@@ -168,11 +168,11 @@ else
         $value = (isset($conf->global->$constante)?$conf->global->$constante:0);
         if ($value == 0)
         {
-            print '<a href="'.$_SERVER['PHP_SELF'].'?action=activate_'.strtolower($const).'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+            print '<a href="'.$_SERVER['PHP_SELF'].'?action=activate_'.strtolower($const).'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
         }
         else if ($value == 1)
         {
-            print '<a href="'.$_SERVER['PHP_SELF'].'?action=disable_'.strtolower($const).'">'.img_picto($langs->trans("Enabled"),'switch_on').'</a>';
+            print '<a href="'.$_SERVER['PHP_SELF'].'?action=disable_'.strtolower($const).'">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
         }
 
         print "</td>";

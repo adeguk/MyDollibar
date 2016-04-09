@@ -376,11 +376,11 @@ foreach ($dirmodels as $reldir)
                             //print "> ".$conf->global->FACTURE_ADDON." - ".$file;
                             if ($conf->global->FACTURE_ADDON == $file || $conf->global->FACTURE_ADDON.'.php' == $file)
                             {
-                                print img_picto($langs->trans("Activated"),'switch_on');
+                                print '<i class="fa fa-toggle-on" title="Activited"></i>';
                             }
                             else
                             {
-                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&value='.preg_replace('/\.php$/','',$file).'&scandir='.$module->scandir.'&label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&value='.preg_replace('/\.php$/','',$file).'&scandir='.$module->scandir.'&label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
                             }
                             print '</td>';
 
@@ -559,14 +559,14 @@ foreach ($dirmodels as $reldir)
 	                            {
 	                            	print '<td align="center">'."\n";
 	                            	print '<a href="'.$_SERVER["PHP_SELF"].'?action=del&value='.$name.'">';
-	                            	print img_picto($langs->trans("Enabled"),'switch_on');
+	                            	print '<i class="fa fa-toggle-on" title="Enabled"></i>';
 	                            	print '</a>';
 	                            	print '</td>';
 	                            }
 	                            else
 	                            {
 	                                print "<td align=\"center\">\n";
-	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&value='.$name.'&scandir='.$module->scandir.'&label='.urlencode($module->name).'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&value='.$name.'&scandir='.$module->scandir.'&label='.urlencode($module->name).'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	                                print "</td>";
 	                            }
 
@@ -578,7 +578,7 @@ foreach ($dirmodels as $reldir)
 	                            }
 	                            else
 	                            {
-	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoc&value='.$name.'&scandir='.$module->scandir.'&label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoc&value='.$name.'&scandir='.$module->scandir.'&label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	                            }
 	                            print '</td>';
 

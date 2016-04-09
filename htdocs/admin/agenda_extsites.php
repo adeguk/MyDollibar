@@ -166,11 +166,11 @@ else
 {
 	if (empty($conf->global->AGENDA_DISABLE_EXT))
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?save=1&AGENDA_DISABLE_EXT=1">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?save=1&AGENDA_DISABLE_EXT=1">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 	else
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?save=1&AGENDA_DISABLE_EXT=0">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?save=1&AGENDA_DISABLE_EXT=0">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	}
 }
 print "</td>";

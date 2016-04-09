@@ -443,8 +443,8 @@ function ajax_constantonoff($code, $input=array(), $entity=null, $revertonoff=0,
 
 	if (empty($conf->use_javascript_ajax))
 	{
-		if (empty($conf->global->$code)) print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_'.$code.'&entity='.$entity.'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
-		else print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_'.$code.'&entity='.$entity.'">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+		if (empty($conf->global->$code)) print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_'.$code.'&entity='.$entity.'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
+		else print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_'.$code.'&entity='.$entity.'">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 	else
 	{
@@ -484,8 +484,8 @@ function ajax_constantonoff($code, $input=array(), $entity=null, $revertonoff=0,
 		</script>'."\n";
 
 		$out.= '<div id="confirm_'.$code.'" title="" style="display: none;"></div>';
-		$out.= '<span id="set_'.$code.'" class="linkobject '.(! empty($conf->global->$code)?'hideobject':'').'">'.($revertonoff?img_picto($langs->trans("Enabled"),'switch_on'):img_picto($langs->trans("Disabled"),'switch_off')).'</span>';
-		$out.= '<span id="del_'.$code.'" class="linkobject '.(! empty($conf->global->$code)?'':'hideobject').'">'.($revertonoff?img_picto($langs->trans("Disabled"),'switch_off'):img_picto($langs->trans("Enabled"),'switch_on')).'</span>';
+		$out.= '<span id="set_'.$code.'" class="linkobject '.(! empty($conf->global->$code)?'hideobject':'').'">'.($revertonoff?'<i class="fa fa-toggle-on" title="Enabled"></i>':'<i class="fa fa-toggle-off" title="Disabled"></i>').'</span>';
+		$out.= '<span id="del_'.$code.'" class="linkobject '.(! empty($conf->global->$code)?'':'hideobject').'">'.($revertonoff?'<i class="fa fa-toggle-off" title="Disabled"></i>':'<i class="fa fa-toggle-on" title="Enabled"></i>').'</span>';
 		$out.="\n";
 	}
 

@@ -430,11 +430,11 @@ foreach ($dirmodels as $reldir)
 						print '<td align="center">';
 						if ($conf->global->PROJECT_ADDON == 'mod_'.$classname)
 						{
-							print img_picto($langs->trans("Activated"),'switch_on');
+							print '<i class="fa fa-toggle-on" title="Activated" style="cursor:pointer"></i>';
 						}
 						else
 						{
-							print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&amp;value=mod_'.$classname.'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+							print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&amp;value=mod_'.$classname.'" alt="'.$langs->trans("Default").'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 						}
 						print '</td>';
 
@@ -534,11 +534,11 @@ if (empty($conf->global->PROJECT_HIDE_TASKS))
 							print '<td align="center">';
 							if ($conf->global->PROJECT_TASK_ADDON == 'mod_'.$classname)
 							{
-								print img_picto($langs->trans("Activated"),'switch_on');
+								print '<i class="fa fa-toggle-on" title="Activated" style="cursor:pointer"></i>';
 							}
 							else
 							{
-								print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmodtask&amp;value=mod_'.$classname.'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+								print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmodtask&amp;value=mod_'.$classname.'" alt="'.$langs->trans("Default").'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 							}
 							print '</td>';
 
@@ -611,8 +611,8 @@ else
 	dol_print_error($db);
 }
 
-print "<table class=\"noborder\" width=\"100%\">\n";
-print "<tr class=\"liste_titre\">\n";
+print "<table class='noborder' width='100%'>\n";
+print "<tr class='liste_titre'>\n";
 print '  <td width="100">'.$langs->trans("Name")."</td>\n";
 print "  <td>".$langs->trans("Description")."</td>\n";
 print '<td align="center" width="60">'.$langs->trans("Activated")."</td>\n";
@@ -671,28 +671,28 @@ foreach ($dirmodels as $reldir)
 								// Active
 								if (in_array($name, $def))
 								{
-									print "<td align=\"center\">\n";
+									print "<td align='center'>\n";
 									print '<a href="'.$_SERVER["PHP_SELF"].'?action=del&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'">';
-									print img_picto($langs->trans("Enabled"),'switch_on');
+									print '<i class="fa fa-toggle-on" title="Enabled"></i>';
 									print '</a>';
 									print "</td>";
 								}
 								else
 								{
-									print "<td align=\"center\">\n";
-									print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+									print "<td align='center'>\n";
+									print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 									print "</td>";
 								}
 
 								// Default
-								print "<td align=\"center\">";
+								print "<td align='center'>";
 								if ($conf->global->PROJECT_ADDON_PDF == "$name")
 								{
 									print img_picto($langs->trans("Default"),'on');
 								}
 								else
 								{
-									print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoc&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+									print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoc&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 								}
 								print '</td>';
 
@@ -734,10 +734,7 @@ foreach ($dirmodels as $reldir)
 
 print '</table><br/>';
 
-
-
-if (empty($conf->global->PROJECT_HIDE_TASKS))
-{
+if (empty($conf->global->PROJECT_HIDE_TASKS)) {
 	/*
 	 * Modeles documents for Task
 	 */
@@ -754,24 +751,21 @@ if (empty($conf->global->PROJECT_HIDE_TASKS))
 	$sql.= " AND entity = ".$conf->entity;
 
 	$resql=$db->query($sql);
-	if ($resql)
-	{
+	if ($resql) {
 		$i = 0;
 		$num_rows=$db->num_rows($resql);
-		while ($i < $num_rows)
-		{
+		while ($i < $num_rows) {
 			$array = $db->fetch_array($resql);
 			array_push($def, $array[0]);
 			$i++;
 		}
 	}
-	else
-	{
+	else {
 		dol_print_error($db);
 	}
 
-	print "<table class=\"noborder\" width=\"100%\">\n";
-	print "<tr class=\"liste_titre\">\n";
+	print "<table class='noborder' width='100%'>\n";
+	print "<tr class='liste_titre'>\n";
 	print '  <td width="100">'.$langs->trans("Name")."</td>\n";
 	print "  <td>".$langs->trans("Description")."</td>\n";
 	print '<td align="center" width="60">'.$langs->trans("Activated")."</td>\n";
@@ -783,10 +777,8 @@ if (empty($conf->global->PROJECT_HIDE_TASKS))
 	clearstatcache();
 
 	$var=true;
-	foreach ($dirmodels as $reldir)
-	{
-		foreach (array('','/doc') as $valdir)
-		{
+	foreach ($dirmodels as $reldir) {
+		foreach (array('','/doc') as $valdir) {
 			$dir = dol_buildpath($reldir."core/modules/project/task/".$valdir);
 
 			if (is_dir($dir))
@@ -830,28 +822,28 @@ if (empty($conf->global->PROJECT_HIDE_TASKS))
 									// Active
 									if (in_array($name, $def))
 									{
-										print "<td align=\"center\">\n";
+										print "<td align='center'>\n";
 										print '<a href="'.$_SERVER["PHP_SELF"].'?action=deltask&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'">';
-										print img_picto($langs->trans("Enabled"),'switch_on');
+										print '<i class="fa fa-toggle-on" title="Enabled"></i>';
 										print '</a>';
 										print "</td>";
 									}
 									else
 									{
-										print "<td align=\"center\">\n";
-										print '<a href="'.$_SERVER["PHP_SELF"].'?action=settask&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+										print "<td align='center'>\n";
+										print '<a href="'.$_SERVER["PHP_SELF"].'?action=settask&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 										print "</td>";
 									}
 
 									// Defaut
-									print "<td align=\"center\">";
+									print "<td align='center'>";
 									if ($conf->global->PROJECT_TASK_ADDON_PDF == "$name")
 									{
 										print img_picto($langs->trans("Default"),'on');
 									}
 									else
 									{
-										print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoctask&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+										print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoctask&amp;value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 									}
 									print '</td>';
 

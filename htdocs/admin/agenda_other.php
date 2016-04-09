@@ -120,11 +120,11 @@ print '<td align="right">'."\n";
 //print ajax_constantonoff('AGENDA_USE_EVENT_TYPE');	Do not use ajax here, we need to reload page to change other combo list
 if (empty($conf->global->AGENDA_USE_EVENT_TYPE))
 {
-	print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_AGENDA_USE_EVENT_TYPE">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+	print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_AGENDA_USE_EVENT_TYPE">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 }
 else
 {
-	print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_AGENDA_USE_EVENT_TYPE">'.img_picto($langs->trans("Enabled"),'switch_on').'</a>';
+	print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_AGENDA_USE_EVENT_TYPE">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 }
 print '</td></tr>'."\n";
 

@@ -37,20 +37,15 @@ $value=GETPOST('value','alpha');
 
 if (!$user->admin) accessforbidden();
 
-
-
 /*
  * Actions
  */
-if ($action == 'setcodeclient')
-{
-	if (dolibarr_set_const($db, "SOCIETE_CODECLIENT_ADDON",$value,'chaine',0,'',$conf->entity) > 0)
-	{
+if ($action == 'setcodeclient') {
+	if (dolibarr_set_const($db, "SOCIETE_CODECLIENT_ADDON",$value,'chaine',0,'',$conf->entity) > 0) {
 		header("Location: ".$_SERVER["PHP_SELF"]);
 		exit;
 	}
-	else
-	{
+	else {
 		dol_print_error($db);
 	}
 }
@@ -348,7 +343,7 @@ foreach ($dirsociete as $dirroot)
     			if ($conf->global->SOCIETE_CODECLIENT_ADDON == "$file")
     			{
     				print '<td align="center">'."\n";
-    				print img_picto($langs->trans("Activated"),'switch_on');
+    				print '<i class="fa fa-toggle-on" title="Activated"></i>';
     				print "</td>\n";
     			}
     			else
@@ -357,7 +352,7 @@ foreach ($dirsociete as $dirroot)
     				if (! empty($conf->multicompany->enabled) && (is_object($mc) && ! empty($mc->sharings['referent']) && $mc->sharings['referent'] == $conf->entity) ? false : true);
     				print '<td align="center">';
     				if (! $disabled) print '<a href="'.$_SERVER['PHP_SELF'].'?action=setcodeclient&value='.$file.'">';
-    				print img_picto($langs->trans("Disabled"),'switch_off');
+    				print '<i class="fa fa-toggle-off" title="Disabled"></i>';
     				if (! $disabled) print '</a>';
     				print '</td>';
     			}
@@ -426,13 +421,13 @@ foreach ($dirsociete as $dirroot)
     			if ($conf->global->SOCIETE_CODECOMPTA_ADDON == "$file")
     			{
     				print '<td align="center">';
-    				print img_picto($langs->trans("Activated"),'switch_on');
+    				print '<i class="fa fa-toggle-on" title="Activated"></i>';
     				print '</td>';
     			}
     			else
     			{
     				print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=setcodecompta&value='.$file.'">';
-    				print img_picto($langs->trans("Disabled"),'switch_off');
+    				print '<i class="fa fa-toggle-off" title="Disabled"></i>';
     				print '</a></td>';
     			}
     			print '<td align="center">';
@@ -461,8 +456,7 @@ $sql.= " FROM ".MAIN_DB_PREFIX."document_model";
 $sql.= " WHERE type = 'company'";
 $sql.= " AND entity = ".$conf->entity;
 $resql=$db->query($sql);
-if ($resql)
-{
+if ($resql) {
 	$i = 0;
 	$num_rows=$db->num_rows($resql);
 	while ($i < $num_rows)
@@ -472,8 +466,7 @@ if ($resql)
 		$i++;
 	}
 }
-else
-{
+else {
 	dol_print_error($db);
 }
 
@@ -530,16 +523,16 @@ foreach ($dirsociete as $dirroot)
 					// Activate / Disable
 					if (in_array($name, $def))
 					{
-						print "<td align=\"center\">\n";
+						print "<td align='center'>\n";
 						//if ($conf->global->COMPANY_ADDON_PDF != "$name")
 						//{
 							print '<a href="'.$_SERVER["PHP_SELF"].'?action=del&value='.$name.'&scandir='.$module->scandir.'&label='.urlencode($module->name).'">';
-							print img_picto($langs->trans("Enabled"),'switch_on');
+							print '<i class="fa fa-toggle-on" title="Enabled"></i>';
 							print '</a>';
 						//}
 						//else
 						//{
-						//	print img_picto($langs->trans("Enabled"),'on');
+						//	print '<i class="fa fa-toggle-on" title="Enabled"></i>';
 						//}
 						print "</td>";
 					}
@@ -547,14 +540,14 @@ foreach ($dirsociete as $dirroot)
 					{
 						if (versioncompare($module->phpmin,versionphparray()) > 0)
 						{
-							print "<td align=\"center\">\n";
+							print "<td align='center'>\n";
 							print img_picto(dol_escape_htmltag($langs->trans("ErrorModuleRequirePHPVersion",join('.',$module->phpmin))),'switch_off');
 							print "</td>";
 						}
 						else
 						{
-							print "<td align=\"center\">\n";
-							print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&value='.$name.'&scandir='.$module->scandir.'&label='.urlencode($module->name).'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+							print "<td align='center'>\n";
+							print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&value='.$name.'&scandir='.$module->scandir.'&label='.urlencode($module->name).'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 							print "</td>";
 						}
 					}
@@ -647,39 +640,39 @@ while ($i < $nbofloop)
 		if ($verif)
 		{
 			print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=setprofid&value='.($i+1).'&status=0">';
-			print img_picto($langs->trans("Activated"),'switch_on');
+			print '<i class="fa fa-toggle-on" title="Activated"></i>';
 			print '</a></td>';
 		}
 		else
 		{
 			print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=setprofid&value='.($i+1).'&status=1">';
-			print img_picto($langs->trans("Disabled"),'switch_off');
+			print '<i class="fa fa-toggle-off" title="Disabled"></i>';
 			print '</a></td>';
 		}
 
 		if ($mandatory)
 		{
 			print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=setprofidmandatory&value='.($i+1).'&status=0">';
-			print img_picto($langs->trans("Activated"),'switch_on');
+			print '<i class="fa fa-toggle-on" title="Activated"></i>';
 			print '</a></td>';
 		}
 		else
 		{
 			print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=setprofidmandatory&value='.($i+1).'&status=1">';
-			print img_picto($langs->trans("Disabled"),'switch_off');
+			print '<i class="fa fa-toggle-off" title="Disabled"></i>';
 			print '</a></td>';
 		}
 
 		if ($invoice_mandatory)
 		{
 			print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=setprofidinvoicemandatory&value='.($i+1).'&status=0">';
-			print img_picto($langs->trans("Activated"),'switch_on');
+			print '<i class="fa fa-toggle-on" title="Activated"></i>';
 			print '</a></td>';
 		}
 		else
 		{
 			print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=setprofidinvoicemandatory&value='.($i+1).'&status=1">';
-			print img_picto($langs->trans("Disabled"),'switch_off');
+			print '<i class="fa fa-toggle-off" title="Disabled"></i>';
 			print '</a></td>';
 		}
 
@@ -765,13 +758,13 @@ print '<td align="center">';
 if (!empty($conf->global->SOCIETE_ADD_REF_IN_LIST))
 {
 	print '<a href="'.$_SERVER['PHP_SELF'].'?action=setaddrefinlist&value=0">';
-	print img_picto($langs->trans("Activated"),'switch_on');
+	print '<i class="fa fa-toggle-on" title="Activated"></i>';
 
 }
 else
 {
 	print '<a href="'.$_SERVER['PHP_SELF'].'?action=setaddrefinlist&value=1">';
-	print img_picto($langs->trans("Disabled"),'switch_off');
+	print '<i class="fa fa-toggle-off" title="Disabled"></i>';
 }
 print '</a></td>';
 print '</tr>';
@@ -785,13 +778,13 @@ print '<td width="80%">'.$langs->trans("HideClosedThirdpartyComboBox").'</td>';
 if (! empty($conf->global->COMPANY_HIDE_INACTIVE_IN_COMBOBOX))
 {
 	print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=sethideinactivethirdparty&status=0">';
-	print img_picto($langs->trans("Activated"),'switch_on');
+	print '<i class="fa fa-toggle-on" title="Activated"></i>';
 	print '</a></td>';
 }
 else
 {
 	print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=sethideinactivethirdparty&status=1">';
-	print img_picto($langs->trans("Disabled"),'switch_off');
+	print '<i class="fa fa-toggle-off" title="Disabled"></i>';
 	print '</a></td>';
 }
 print '</tr>';

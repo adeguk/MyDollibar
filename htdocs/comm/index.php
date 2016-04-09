@@ -106,14 +106,16 @@ if (count($listofsearchfields))
 	$i=0;
 	foreach($listofsearchfields as $key => $value)
 	{
-		if ($i == 0) print '<tr class="liste_titre"><td colspan="3">'.$langs->trans("Search").'</td></tr>';
+		if ($i == 0) print '<tr class="liste_titre"><td colspan="2">'.$langs->trans("Search").'</td></tr>';
 		print '<tr>';
-		print '<td class="nowrap"><label for="search_contract">'.$langs->trans($value["text"]).'</label>:</td><td><input type="text" class="flat" name="'.$key.'" id="'.$key.'" size="18"></td>';
-		if ($i == 0) print '<td rowspan="'.count($listofsearchfields).'"><input type="submit" value="'.$langs->trans("Search").'" class="button"></td>';
-		print '</tr>';
+		print '<td><label for="search_contract">'.$langs->trans($value["text"]).'</label>:</td>';
+		echo "<td><input type='text' name='$key' id='$key'></td></tr>";
+		//if ($i == 0)
 		$i++;
 	}
-	print '</table>';	
+	print '<tr><td colspan="2"><input type="submit" value="'.$langs->trans("Search").'" class="button"></td>';
+	print '</tr>';
+	print '</table>';
 	print '</form>';
 	print '<br>';
 }
@@ -141,7 +143,7 @@ if (! empty($conf->propal->enabled) && $user->rights->propal->lire)
 	{
 		$total = 0;
 		$num = $db->num_rows($resql);
-	    
+
 		print '<table class="noborder" width="100%">';
 		print '<tr class="liste_titre">';
 		print '<td colspan="3">'.$langs->trans("ProposalsDraft").' <span class="badge">'.$num.'</span></td></tr>';
@@ -216,7 +218,7 @@ if (! empty($conf->commande->enabled) && $user->rights->commande->lire)
 	{
 		$total = 0;
 		$num = $db->num_rows($resql);
-	    
+
 		print '<table class="noborder" width="100%">';
 		print '<tr class="liste_titre">';
 		print '<td colspan="3">'.$langs->trans("DraftOrders").' <span class="badge">'.$num.'</span></td></tr>';

@@ -40,49 +40,39 @@ if (! $user->admin) accessforbidden();
 
 $extrafields = new ExtraFields($db);
 
-
 /*
  * Action
  */
-if (preg_match('/set_(.*)/',$action,$reg))
-{
+if (preg_match('/set_(.*)/',$action,$reg)) {
     $code=$reg[1];
-    if (dolibarr_set_const($db, $code, 1, 'chaine', 0, '', $conf->entity) > 0)
-    {
+    if (dolibarr_set_const($db, $code, 1, 'chaine', 0, '', $conf->entity) > 0) {
         header("Location: ".$_SERVER["PHP_SELF"]);
         exit;
     }
-    else
-    {
+    else {
         dol_print_error($db);
     }
 }
 
-if (preg_match('/del_(.*)/',$action,$reg))
-{
+if (preg_match('/del_(.*)/',$action,$reg)) {
     $code=$reg[1];
-    if (dolibarr_del_const($db, $code, $conf->entity) > 0)
-    {
+    if (dolibarr_del_const($db, $code, $conf->entity) > 0) {
         header("Location: ".$_SERVER["PHP_SELF"]);
         exit;
     }
-    else
-    {
+    else {
         dol_print_error($db);
     }
 }
 //Set hide closed customer into combox or select
-if ($action == 'sethideinactiveuser')
-{
+if ($action == 'sethideinactiveuser') {
 	$status = GETPOST('status','alpha');
 
-	if (dolibarr_set_const($db, "USER_HIDE_INACTIVE_IN_COMBOBOX",$status,'chaine',0,'',$conf->entity) > 0)
-	{
+	if (dolibarr_set_const($db, "USER_HIDE_INACTIVE_IN_COMBOBOX",$status,'chaine',0,'',$conf->entity) > 0) {
 		header("Location: ".$_SERVER["PHP_SELF"]);
 		exit;
 	}
-	else
-	{
+	else {
 		dol_print_error($db);
 	}
 }
@@ -96,7 +86,6 @@ llxHeader('',$langs->trans("UsersSetup"),$help_url);
 
 $linkback='<a href="'.DOL_URL_ROOT.'/admin/modules.php">'.$langs->trans("BackToModuleList").'</a>';
 print load_fiche_titre($langs->trans("UsersSetup"),$linkback,'title_setup');
-
 
 $head=user_admin_prepare_head();
 
@@ -119,23 +108,18 @@ print '<td>'.$langs->trans("UserMailRequired").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 
 print '<td align="center" width="100">';
-if ($conf->use_javascript_ajax)
-{
+if ($conf->use_javascript_ajax) {
 	print ajax_constantonoff('USER_MAIL_REQUIRED');
 }
-else
-{
-	if (empty($conf->global->USER_MAIL_REQUIRED))
-	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_USER_MAIL_REQUIRED">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+else {
+	if (empty($conf->global->USER_MAIL_REQUIRED)) {
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_USER_MAIL_REQUIRED">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	}
-	else
-	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_USER_MAIL_REQUIRED">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+	else {
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_USER_MAIL_REQUIRED">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 }
 print '</td></tr>';
-
 print '</table>';
 
 dol_fiche_end();

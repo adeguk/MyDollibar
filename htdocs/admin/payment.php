@@ -162,11 +162,11 @@ foreach ($dirmodels as $reldir)
                             //print "> ".$conf->global->PAYMENT_ADDON." - ".$file;
                             if ($conf->global->PAYMENT_ADDON == $file || $conf->global->PAYMENT_ADDON.'.php' == $file)
                             {
-                                print img_picto($langs->trans("Activated"),'switch_on');
+                                print '<i class="fa fa-toggle-on" title="Activited"></i>';
                             }
                             else
                             {
-                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&value='.preg_replace('/\.php$/','',$file).'&scandir='.$module->scandir.'&label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&value='.preg_replace('/\.php$/','',$file).'&scandir='.$module->scandir.'&label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
                             }
                             print '</td>';
 

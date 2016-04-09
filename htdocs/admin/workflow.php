@@ -122,13 +122,13 @@ foreach($workflowcodes as $key => $params)
    		if (! empty($conf->global->$key))
    		{
    			print '<a href="'.$_SERVER['PHP_SELF'].'?action=del'.$key.'">';
-  			print img_picto($langs->trans("Activated"),'switch_on');
+  			print '<i class="fa fa-toggle-on" title="Activited"></i>';
    			print '</a>';
    		}
    		else
    		{
    			print '<a href="'.$_SERVER['PHP_SELF'].'?action=set'.$key.'">';
-  			print img_picto($langs->trans("Disabled"),'switch_off');
+  			print '<i class="fa fa-toggle-off" title="Disabled"></i>';
    			print '</a>';
    		}
    	}

@@ -50,8 +50,8 @@ if (!$user->admin) accessforbidden();
 
 $acts[0] = "activate";
 $acts[1] = "disable";
-$actl[0] = img_picto($langs->trans("Disabled"),'switch_off');
-$actl[1] = img_picto($langs->trans("Activated"),'switch_on');
+$actl[0] = '<i class="fa fa-toggle-off" title="Disabled"></i>';
+$actl[1] = '<i class="fa fa-toggle-on" title="Activited"></i>';
 
 $listoffset=GETPOST('listoffset');
 $listlimit=GETPOST('listlimit')>0?GETPOST('listlimit'):1000;

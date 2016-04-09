@@ -190,7 +190,7 @@ while ($i < $nbofbank)
 	else
 	{
 		print '<td align="center"><a href="'.$_SERVER['PHP_SELF'].'?action=setbankorder&amp;value='.$i.'">';
-		print img_picto($langs->trans("Disabled"),'off');
+		print '<i class="fa fa-toggle-off" title="Disabled"></i>';
 		print '</a></td>';
 	}
 	print '<td>&nbsp;</td>';

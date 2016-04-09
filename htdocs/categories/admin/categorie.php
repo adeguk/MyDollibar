@@ -110,11 +110,11 @@ else
 {
 	if (empty($conf->global->CATEGORIE_RECURSIV_ADD))
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_CATEGORIE_RECURSIV_ADD">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_CATEGORIE_RECURSIV_ADD">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	}
 	else
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_CATEGORIE_RECURSIV_ADD">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_CATEGORIE_RECURSIV_ADD">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 }
 print '</td></tr>';

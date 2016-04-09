@@ -163,7 +163,7 @@ if (! defined('NOSCANPOSTFORINJECTION'))
 }
 
 // This is to make Dolibarr working with Plesk
-if (! empty($_SERVER['DOCUMENT_ROOT']) && substr($_SERVER['DOCUMENT_ROOT'], -6) !== 'htdocs') 
+if (! empty($_SERVER['DOCUMENT_ROOT']) && substr($_SERVER['DOCUMENT_ROOT'], -6) !== 'htdocs')
 {
 	set_include_path($_SERVER['DOCUMENT_ROOT'] . '/htdocs');
 }
@@ -529,14 +529,14 @@ if (! defined('NOLOGIN'))
                 $langs->load('errors');
 
                 $_SESSION["dol_loginmesg"]=$langs->trans("ErrorCantLoadUserFromDolibarrDatabase",$login);
-            
+
                 // TODO @deprecated Remove this. Hook must be used, not this trigger.
                 $user->trigger_mesg='ErrorCantLoadUserFromDolibarrDatabase - login='.$login;
             }
             if ($resultFetchUser < 0)
             {
                 $_SESSION["dol_loginmesg"]=$user->error;
-            
+
                 // TODO @deprecated Remove this. Hook must be used, not this trigger.
                 $user->trigger_mesg=$user->error;
             }
@@ -582,14 +582,14 @@ if (! defined('NOLOGIN'))
                 $langs->load('errors');
 
                 $_SESSION["dol_loginmesg"]=$langs->trans("ErrorCantLoadUserFromDolibarrDatabase",$login);
-                
+
                 // TODO @deprecated Remove this. Hook must be used, not this trigger.
                 $user->trigger_mesg='ErrorCantLoadUserFromDolibarrDatabase - login='.$login;
             }
             if ($resultFetchUser < 0)
             {
                 $_SESSION["dol_loginmesg"]=$user->error;
-            
+
                 // TODO @deprecated Remove this. Hook must be used, not this trigger.
                 $user->trigger_mesg=$user->error;
             }
@@ -691,7 +691,7 @@ if (! defined('NOLOGIN'))
 		{
             $db->commit();
         }
-        
+
         if (! empty($user->conf->MAIN_LANDING_PAGE))    // Example: /index.php
         {
             $newpath=dol_buildpath($user->conf->MAIN_LANDING_PAGE, 1);
@@ -842,8 +842,7 @@ $mesg=''; $warning=''; $error=0;
 $mesgs=array(); $warnings=array(); $errors=array();
 
 // Constants used to defined number of lines in textarea
-if (empty($conf->browser->firefox))
-{
+if (empty($conf->browser->firefox)) {
     define('ROWS_1',1);
     define('ROWS_2',2);
     define('ROWS_3',3);
@@ -854,8 +853,7 @@ if (empty($conf->browser->firefox))
     define('ROWS_8',8);
     define('ROWS_9',9);
 }
-else
-{
+else {
     define('ROWS_1',0);
     define('ROWS_2',1);
     define('ROWS_3',2);
@@ -870,22 +868,19 @@ else
 $heightforframes=52;
 
 // Init menu manager
-if (! defined('NOREQUIREMENU'))
-{
+if (! defined('NOREQUIREMENU')) {
 	if (empty($user->societe_id))    // If internal user or not defined
 	{
 		$conf->standard_menu=(empty($conf->global->MAIN_MENU_STANDARD_FORCED)?(empty($conf->global->MAIN_MENU_STANDARD)?'eldy_menu.php':$conf->global->MAIN_MENU_STANDARD):$conf->global->MAIN_MENU_STANDARD_FORCED);
 	}
-	else                        // If external user
-	{
+	else {                       // If external user
 		$conf->standard_menu=(empty($conf->global->MAIN_MENUFRONT_STANDARD_FORCED)?(empty($conf->global->MAIN_MENUFRONT_STANDARD)?'eldy_menu.php':$conf->global->MAIN_MENUFRONT_STANDARD):$conf->global->MAIN_MENUFRONT_STANDARD_FORCED);
 	}
 
 	// Load the menu manager (only if not already done)
 	$file_menu=$conf->standard_menu;
 	if (GETPOST('menu')) $file_menu=GETPOST('menu');     // example: menu=eldy_menu.php
-	if (! class_exists('MenuManager'))
-	{
+	if (! class_exists('MenuManager')) {
 		$menufound=0;
 		$dirmenus=array_merge(array("/core/menus/"),(array) $conf->modules_parts['menus']);
 		foreach($dirmenus as $dirmenu)
@@ -1417,7 +1412,7 @@ function top_menu($head, $title='', $target='', $disablejs=0, $disablehead=0, $a
 </script>' . "\n";
 
 		// Raven.js for client-side Sentry logging support
-		if (array_key_exists('mod_syslog_sentry', $conf->loghandlers) && ! empty($conf->global->SYSLOG_SENTRY_DSN)) 
+		if (array_key_exists('mod_syslog_sentry', $conf->loghandlers) && ! empty($conf->global->SYSLOG_SENTRY_DSN))
 		{
 			// Filter out secret key
 			$dsn = parse_url($conf->global->SYSLOG_SENTRY_DSN);
@@ -1438,8 +1433,7 @@ function top_menu($head, $title='', $target='', $disablejs=0, $disablehead=0, $a
 
     if (empty($conf->dol_use_jmobile) && ! empty($conf->use_javascript_ajax) && ! empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT)) print '<div class="ui-layout-north"> <!-- Begin top layout -->'."\n";
 
-    if (empty($conf->dol_hide_topmenu))
-    {
+    if (empty($conf->dol_hide_topmenu)) {
     	print '<div class="side-nav-vert"><div id="id-top">';
 
 	    // Show menu entries
@@ -1452,11 +1446,9 @@ function top_menu($head, $title='', $target='', $disablejs=0, $disablehead=0, $a
 
 	    // Define link to login card
 	    $appli='Dolibarr';
-	    if (! empty($conf->global->MAIN_APPLICATION_TITLE))
-	    {
+	    if (! empty($conf->global->MAIN_APPLICATION_TITLE)) {
 	    	$appli=$conf->global->MAIN_APPLICATION_TITLE;
-	    	if (preg_match('/\d\.\d/', $appli))
-	    	{
+	    	if (preg_match('/\d\.\d/', $appli)) {
 				if (! preg_match('/'.preg_quote(DOL_VERSION).'/', $appli)) $appli.=" (".DOL_VERSION.")";	// If new title contains a version that is different than core
 	    	}
 	    	else $appli.=" ".DOL_VERSION;
@@ -1464,20 +1456,18 @@ function top_menu($head, $title='', $target='', $disablejs=0, $disablehead=0, $a
 	    else $appli.=" ".DOL_VERSION;
 		if (! empty($conf->global->MAIN_FEATURES_LEVEL)) $appli.="<br>".$langs->trans("LevelOfFeature").': '.$conf->global->MAIN_FEATURES_LEVEL;
 
-	    $logouttext='';
+	    $logouttext = '';
 	    $logouthtmltext=$appli.'<br>';
-	    if ($_SESSION["dol_authmode"] != 'forceuser' && $_SESSION["dol_authmode"] != 'http')
-	    {
+	    if ($_SESSION["dol_authmode"] != 'forceuser' && $_SESSION["dol_authmode"] != 'http') {
 	    	$logouthtmltext.=$langs->trans("Logout").'<br>';
 
 	    	$logouttext .='<a href="'.DOL_URL_ROOT.'/user/logout.php">';
-	        $logouttext .= img_picto($langs->trans('Logout').":".$langs->trans('Logout'), 'logout.png', 'class="login"', 0, 0, 1);
+	        $logouttext .= '<i style="font-size: 25px;" class="fa fa-sign-out"></i>';
 	        $logouttext .='</a>';
 	    }
-	    else
-	    {
+	    else {
 	    	$logouthtmltext.=$langs->trans("NoLogoutProcessWithAuthMode",$_SESSION["dol_authmode"]);
-	        $logouttext .= img_picto($langs->trans('Logout').":".$langs->trans('Logout'), 'logout.png', 'class="login"', 0, 0, 1);
+	        $logouttext .= '<i style="font-size: 25px;" class="fa fa-sign-out"></i>';
 	    }
 
 	    print '<div class="login_block">'."\n";
@@ -1487,7 +1477,7 @@ function top_menu($head, $title='', $target='', $disablejs=0, $disablehead=0, $a
 
 	    // User photo
 	    $toprightmenu.='<div class="inline-block nowrap"><div class="inline-block login_block_elem" style="padding: 0px;">';
-	    $toprightmenu.=$user->getPhotoUrl(0,0,'loginphoto');
+	    $toprightmenu.='<i style="font-size: 25px;" class="fa fa-user"></i>';
 	    $toprightmenu.='</div></div>';
 
 	    // Login name with tooltip
@@ -1501,20 +1491,18 @@ function top_menu($head, $title='', $target='', $disablejs=0, $disablehead=0, $a
 		// Execute hook printTopRightMenu (hooks should output string like '<div class="login"><a href="">mylink</a></div>')
 	    $parameters=array();
 	    $result=$hookmanager->executeHooks('printTopRightMenu',$parameters);    // Note that $action and $object may have been modified by some hooks
-		if (is_numeric($result))
-		{
+		if (is_numeric($result)) {
 			if (empty($result)) $toprightmenu.=$hookmanager->resPrint;		// add
 			else  $toprightmenu=$hookmanager->resPrint;						// replace
 		}
 		else $toprightmenu.=$result;	// For backward compatibility
 
 	    // Link to print main content area
-	    if (empty($conf->global->MAIN_PRINT_DISABLELINK) && empty($conf->browser->phone))
-	    {
+	    if (empty($conf->global->MAIN_PRINT_DISABLELINK) && empty($conf->browser->phone)) {
 	        $qs=$_SERVER["QUERY_STRING"];
 	        $qs.=(($qs && $morequerystring)?'&':'').$morequerystring;
 	        $text ='<a href="'.$_SERVER["PHP_SELF"].'?'.$qs.($qs?'&':'').'optioncss=print" target="_blank">';
-	        $text.= img_picto(":".$langs->trans("PrintContentArea"), 'printer.png', 'class="printer"');
+	        $text.= '<i style="font-size: 25px;" class="fa fa-print"></i>';
 	        $text.='</a>';
 	        $toprightmenu.=Form::textwithtooltip('',$langs->trans("PrintContentArea"),2,1,$text,'login_block_elem',2);
 	    }
@@ -1561,8 +1549,7 @@ function left_menu($menu_array_before, $helppagename='', $moresearchform='', $me
     $searchform='';
     $bookmarks='';
 
-    if (empty($conf->dol_hide_leftmenu))
-    {
+    if (empty($conf->dol_hide_leftmenu)) {
 	    // Instantiate hooks of thirdparty module
 	    $hookmanager->initHooks(array('searchform','leftblock'));
 
@@ -1591,8 +1578,9 @@ function left_menu($menu_array_before, $helppagename='', $moresearchform='', $me
 	        $searchform.=printSearchForm(DOL_URL_ROOT.'/product/list.php', DOL_URL_ROOT.'/product/list.php', $langs->trans("Products")."/".$langs->trans("Services"), 'products', 'sall', 'P', 'searchleftp', img_object('','product'));
 	    }
 
-	    if (((! empty($conf->product->enabled) && $user->rights->produit->lire) || (! empty($conf->service->enabled) && $user->rights->service->lire)) && ! empty($conf->fournisseur->enabled)
-	    && ! empty($conf->global->MAIN_SEARCHFORM_PRODUITSERVICE_SUPPLIER))
+	    if (((! empty($conf->product->enabled) && $user->rights->produit->lire) || (! empty($conf->service->enabled)
+            && $user->rights->service->lire)) && ! empty($conf->fournisseur->enabled)
+	        && ! empty($conf->global->MAIN_SEARCHFORM_PRODUITSERVICE_SUPPLIER))
 	    {
 	        $langs->load("products");
 	        $searchform.=printSearchForm(DOL_URL_ROOT.'/fourn/product/list.php', DOL_URL_ROOT.'/fourn/product/list.php', $langs->trans("SupplierRef"), 'products', 'srefsupplier', '', 'searchlefts', img_object('','product'));
@@ -1620,8 +1608,7 @@ function left_menu($menu_array_before, $helppagename='', $moresearchform='', $me
 		else $searchform=$hookmanager->resPrint;
 
 	    // Define $bookmarks
-	    if (! empty($conf->bookmark->enabled) && $user->rights->bookmark->lire)
-	    {
+	    if (! empty($conf->bookmark->enabled) && $user->rights->bookmark->lire) {
 	        include_once (DOL_DOCUMENT_ROOT.'/bookmarks/bookmarks.lib.php');
 	        $langs->load("bookmarks");
 
@@ -1943,4 +1930,3 @@ if (! function_exists("llxFooter"))
         print "</html>\n";
     }
 }
-

@@ -181,11 +181,11 @@ else
 {
 	if (empty($conf->global->DISPLAY_MARGIN_RATES))
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_DISPLAY_MARGIN_RATES">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_DISPLAY_MARGIN_RATES">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	}
 	else
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_DISPLAY_MARGIN_RATES">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_DISPLAY_MARGIN_RATES">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 }
 print '</td>';
@@ -205,11 +205,11 @@ else
 {
 	if (empty($conf->global->DISPLAY_MARK_RATES))
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_DISPLAY_MARK_RATES">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_DISPLAY_MARK_RATES">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	}
 	else
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_DISPLAY_MARK_RATES">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_DISPLAY_MARK_RATES">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 }
 print '</td>';
@@ -228,11 +228,11 @@ else
 {
 	if (empty($conf->global->ForceBuyingPriceIfNull))
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_ForceBuyingPriceIfNull">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_ForceBuyingPriceIfNull">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	}
 	else
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_ForceBuyingPriceIfNull">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_ForceBuyingPriceIfNull">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 }
 print '</td>';

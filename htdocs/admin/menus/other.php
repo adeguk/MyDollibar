@@ -110,11 +110,11 @@ print '<td colspan="3">'.$langs->trans("HideUnauthorizedMenu").'</td>';
 print '<td align="center">';
 if (empty($conf->global->MAIN_MENU_HIDE_UNAUTHORIZED))
 {
-	print '<a href="'.$_SERVER["PHP_SELF"].'?action=activate_hidemenu">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+	print '<a href="'.$_SERVER["PHP_SELF"].'?action=activate_hidemenu">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 }
 else
 {
-	print '<a href="'.$_SERVER["PHP_SELF"].'?action=disable_hidemenu">'.img_picto($langs->trans("Enabled"),'switch_on').'</a>';
+	print '<a href="'.$_SERVER["PHP_SELF"].'?action=disable_hidemenu">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 }
 print "</td>";
 print '</tr>';
@@ -128,11 +128,11 @@ if (isset($conf->global->MAIN_FEATURES_LEVEL) && $conf->global->MAIN_FEATURES_LE
 	print '<td align="center">';
 	if (empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))
 	{
-		print '<a href="'.$_SERVER["PHP_SELF"].'?action=activate_layoutmenu">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+		print '<a href="'.$_SERVER["PHP_SELF"].'?action=activate_layoutmenu">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	}
 	else
 	{
-		print '<a href="'.$_SERVER["PHP_SELF"].'?action=disable_layoutmenu">'.img_picto($langs->trans("Enabled"),'switch_on').'</a>';
+		print '<a href="'.$_SERVER["PHP_SELF"].'?action=disable_layoutmenu">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 	print "</td>";
 	print '</tr>';

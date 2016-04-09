@@ -413,10 +413,10 @@ if ($socid && $action != 'edit' && $action != "create")
             print '<td align="center" width="70">';
             if (!$rib->default_rib) {
                 print '<a href="'.DOL_URL_ROOT.'/societe/rib.php?socid='.$object->id.'&ribid='.$rib->id.'&action=setasdefault">';
-                print img_picto($langs->trans("Disabled"),'off');
+                print '<i class="fa fa-toggle-off" title="Disabled"></i>';
                 print '</a>';
             } else {
-                print img_picto($langs->trans("Enabled"),'on');
+                print '<i class="fa fa-toggle-on" title="Enabled"></i>';
             }
             print '</td>';
 

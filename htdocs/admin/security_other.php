@@ -129,11 +129,11 @@ if (function_exists("imagecreatefrompng"))
 	{
 		if (empty($conf->global->MAIN_SECURITY_ENABLECAPTCHA))
 		{
-			print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_MAIN_SECURITY_ENABLECAPTCHA">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+			print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_MAIN_SECURITY_ENABLECAPTCHA">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 		}
 		else
 		{
-			print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_MAIN_SECURITY_ENABLECAPTCHA">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+			print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_MAIN_SECURITY_ENABLECAPTCHA">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 		}
 	}
 }
@@ -157,11 +157,11 @@ else
 {
 	if (empty($conf->global->MAIN_USE_ADVANCED_PERMS))
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_MAIN_USE_ADVANCED_PERMS">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_MAIN_USE_ADVANCED_PERMS">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	}
 	else
 	{
-		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_MAIN_USE_ADVANCED_PERMS">'.img_picto($langs->trans("Enabled"),'on').'</a>';
+		print '<a href="'.$_SERVER['PHP_SELF'].'?action=del_MAIN_USE_ADVANCED_PERMS">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 	}
 }
 print "</td></tr>";

@@ -286,7 +286,7 @@ foreach ($dirproduct as $dirroot)
     			if (! empty($conf->global->PRODUCT_CODEPRODUCT_ADDON) && $conf->global->PRODUCT_CODEPRODUCT_ADDON == $file)
     			{
     				print '<td align="center">'."\n";
-    				print img_picto($langs->trans("Activated"),'switch_on');
+    				print '<i class="fa fa-toggle-on" title="Activited"></i>';
     				print "</td>\n";
     			}
     			else
@@ -295,7 +295,7 @@ foreach ($dirproduct as $dirroot)
     				if (! empty($conf->multicompany->enabled) && (is_object($mc) && ! empty($mc->sharings['referent']) && $mc->sharings['referent'] == $conf->entity) ? false : true);
     				print '<td align="center">';
     				if (! $disabled) print '<a href="'.$_SERVER['PHP_SELF'].'?action=setcodeproduct&value='.$file.'">';
-    				print img_picto($langs->trans("Disabled"),'switch_off');
+    				print '<i class="fa fa-toggle-off" title="Disabled"></i>';
     				if (! $disabled) print '</a>';
     				print '</td>';
     			}

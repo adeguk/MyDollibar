@@ -64,7 +64,7 @@ $theme='eldy';	// Value of theme
 if (! empty($conf->global->MAIN_OVERWRITE_THEME_RES)) { $path='/'.$conf->global->MAIN_OVERWRITE_THEME_RES; $theme=$conf->global->MAIN_OVERWRITE_THEME_RES; }
 
 // Define image path files and other constants
-$fontlist='arial,tahoma,verdana,helvetica';    //$fontlist='Helvetica, Verdana, Arial, sans-serif';
+$fontlist='roboto,calibri,tahoma';    //$fontlist='Helvetica, Verdana, Arial, sans-serif';
 $img_head='';
 $img_button=dol_buildpath($path.'/theme/'.$theme.'/img/button_bg.png',1);
 $dol_hide_topmenu=$conf->dol_hide_topmenu;
@@ -94,7 +94,8 @@ $colorbackbody='255,255,255';
 $colortexttitlenotab='80,80,0';
 $colortexttitle='';
 $colortext='';
-$fontsize='12';
+$fontsize='16';
+$lineheight='20';
 $fontsizesmaller='11';
 $usegradient=1;
 $useboldtitle=1;
@@ -121,8 +122,8 @@ if (empty($conf->global->THEME_ELDY_ENABLE_PERSONALIZED))
     $conf->global->THEME_ELDY_BACKBODY='255,255,255';
     //$conf->global->THEME_ELDY_TEXTTITLE='0,0,0';
     $conf->global->THEME_ELDY_TEXT='0,0,0';
-    
-    $conf->global->THEME_ELDY_FONT_SIZE1='12';
+
+    $conf->global->THEME_ELDY_FONT_SIZE1='16';
     $conf->global->THEME_ELDY_FONT_SIZE2='11';
 }
 //var_dump($conf->global->THEME_ELDY_BACKBODY);
@@ -220,6 +221,8 @@ if (! empty($conf->dol_optimize_smallscreen)) $fontsize=11;
 /* Default styles                                                                 */
 /* ============================================================================== */
 
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
 
 body {
 <?php if (GETPOST("optioncss") == 'print') {  ?>
@@ -230,10 +233,8 @@ body {
 	color: #101010;
 	font-size: <?php print $fontsize ?>px;
 	font-family: <?php print $fontlist ?>;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-right: 0;
-    margin-left: 0;
+	line-height: <?php print $lineheight ?>px;
+    margin: 0;
     <?php print 'direction: '.$langs->trans("DIRECTION").";\n"; ?>
 }
 
@@ -257,7 +258,7 @@ input, input.flat, textarea, textarea.flat, form.flat select, select, select.fla
     background: #FFF;
     color: #111;
     border: 1px solid #C0C0C0;
-    margin: 0px 0px 0px 0px;
+    margin:0;
 }
 
 input, textarea, select {
@@ -278,16 +279,10 @@ input.removedassigned  {
 }
 <?php } ?>
 
-select.flat, form.flat select {
-	font-weight: normal;
-}
-input:disabled {
-	background:#ddd;
-}
+select.flat, form.flat select {	font-weight: normal;}
+input:disabled {background:#ddd;}
 
-input.liste_titre {
-	box-shadow: none !important;
-}
+input.liste_titre {	box-shadow: none !important;}
 input.removedfile {
 	padding: 0px !important;
 	border: 0px !important;
@@ -314,7 +309,6 @@ input:-moz-placeholder { color:#ccc; }
 legend { margin-bottom: 8px; }
 <?php } ?>
 fieldset { border: 1px solid #AAAAAA !important; box-shadow: 2px 2px 3px #DDD; }
-
 
 .button, sbmtConnexion {
     font-family: <?php print $fontlist ?>;
@@ -567,7 +561,7 @@ td.showDragHandle {
 
 div.fiche {
 	margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_leftmenu?'4':'20'):'24')); ?>px;
-	margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'12':'4')); ?>px;
+	margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'20':'4')); ?>px;
 	<?php if (! empty($conf->dol_hide_leftmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
 }
 
@@ -633,7 +627,7 @@ div.arearef {
 	margin-bottom: 10px;
 }
 div.heightref {
-	min-height: 80px; 
+	min-height: 80px;
 }
 div.divphotoref {
 	padding-right: 20px;
@@ -668,7 +662,7 @@ img.photoref {
 <?php
 $minwidthtmenu=66;		/* minimul widht for one top menu entry */
 $heightmenu=46;			/* height of top menu, part with image */
-$heightmenu2=48;        /* height of top menu, part with login  */
+$heightmenu2=53;        /* height of top menu, part with login  */
 $disableimages = 0;
 $maxwidthloginblock = 110;
 if (! empty($conf->global->THEME_ELDY_DISABLE_IMAGE) || $dol_optimize_smallscreen) { $disableimages = 1; $maxwidthloginblock = 180; }
@@ -693,6 +687,8 @@ div#id-top {
 	height: <?php print $heightmenu2; ?>px;
 	<?php } ?>
 <?php } ?>
+
+padding-bottom: 7px;
 }
 
 div#tmenu_tooltip {
@@ -713,8 +709,8 @@ div.tmenudiv {
     border-top: 0px;
     border-<?php print $left; ?>: 0px;
     border-<?php print $right; ?>: 0px;
-    padding: 0px 0px 0px 0px;	/* t r b l */
-    margin: 0px 0px 0px 0px;	/* t r b l */
+    padding:0;	/* t r b l */
+    margin:0;	/* t r b l */
 	font-size: 13px;
     font-weight: normal;
 	color: #000000;
@@ -744,7 +740,7 @@ a.tmenu:link, a.tmenu:visited, a.tmenu:hover, a.tmenu:active {
 a.tmenusel:link, a.tmenusel:visited, a.tmenusel:hover, a.tmenusel:active {
 	font-weight: normal;
 	padding: 0px 5px 0px 5px;
-	margin: 0px 0px 0px 0px;
+	margin:0;
 	white-space: nowrap;
 	color: #<?php echo $colortextbackhmenu; ?>;
 	text-decoration: none !important;
@@ -752,8 +748,8 @@ a.tmenusel:link, a.tmenusel:visited, a.tmenusel:hover, a.tmenusel:active {
 
 
 ul.tmenu {	/* t r b l */
-    padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
+    padding:0;
+    margin:0;
 	list-style: none;
 }
 ul.tmenu li {	/* We need this to have background color when menu entry wraps on new lines */
@@ -766,6 +762,7 @@ ul.tmenu li {	/* We need this to have background color when menu entry wraps on 
 	background-image: -ms-linear-gradient(top, rgba(255,255,255,.1) 0%, rgba(0,0,0,.4) 100%);
 	background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, rgba(255,255,255,.1)), color-stop(1, rgba(0,0,0,.4)) );
 	<?php } ?>
+	padding-bottom:7px;
 }
 li.tmenu, li.tmenusel {
 	<?php print $minwidthtmenu?'min-width: '.$minwidthtmenu.'px;':''; ?>
@@ -807,7 +804,7 @@ div.tmenuleft
 }
 div.tmenucenter
 {
-	padding-top: <?php print $disableimages?'4':'2'; ?>px;
+	padding-top: <?php print $disableimages?'4':'7'; ?>px;
 	padding-left: 0px;
 	padding-right: 0px;
 	<?php if ($disableimages) { ?>
@@ -1048,13 +1045,14 @@ table.login_table_securitycode tr td {
 div.login_block {
 	position: absolute;
 	text-align: right;
-	<?php print $right; ?>: 5px;
-	top: 3px;
+	<?php print $right; ?>: 20px;
+	top: 12px;
 	font-weight: bold;
 	max-width: <?php echo $maxwidthloginblock; ?>px;
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 	display: none;
 	<?php } ?>
+	color:#fff
 }
 div.login_block a {
 	color: #<?php echo $colortextbackvmenu; ?>;
@@ -1133,11 +1131,11 @@ div.vmenu, td.vmenu {
     padding: 0px;
     padding-bottom: 0px;
     padding-top: 1px;
-    width: 174px;
+    width: 225px;
 }
 
 .vmenu {
-	margin-left: 4px;
+	margin-left: 10px;
 	<?php if (GETPOST("optioncss") == 'print') { ?>
     display: none;
 	<?php } ?>
@@ -1205,7 +1203,7 @@ div.blockvmenupair, div.blockvmenuimpair, div.blockvmenubookmarks, div.blockvmen
     -moz-box-shadow: 3px 3px 4px #DDD;
     -webkit-box-shadow: 3px 3px 4px #DDD;
     box-shadow: 3px 3px 4px #DDD;
-  */  
+  */
 }
 
 div.blockvmenusearch
@@ -1549,17 +1547,17 @@ div.tabsElem {
 
 div.tabBar {
     color: #<?php echo $colortextbacktab; ?>;
-    padding-top: <?php echo ($dol_optimize_smallscreen?'4':'16'); ?>px;
-    padding-left: <?php echo ($dol_optimize_smallscreen?'4':'18'); ?>px;
+    padding-top: <?php echo ($dol_optimize_smallscreen?'4':'5'); ?>px;
+    /*padding-left: <?php echo ($dol_optimize_smallscreen?'4':'18'); ?>px;
     padding-right: <?php echo ($dol_optimize_smallscreen?'4':'18'); ?>px;
-    padding-bottom: <?php echo ($dol_optimize_smallscreen?'4':'14'); ?>px;
-    margin: 0px 0px 14px 0px;
-    -moz-border-radius:4px;
+    padding-bottom: <?php echo ($dol_optimize_smallscreen?'4':'14'); ?>px;*/
+    margin: 0px 0px 15px 0px;
+    /*-moz-border-radius:4px;
     -webkit-border-radius: 4px;
 	border-radius: 4px;
     border-right: 1px solid #AAA;
     border-bottom: 1px solid #AAA;
-    border-left: 1px solid #AAA;
+    border-left: 1px solid #AAA;*/
     border-top: 1px solid #BBB;
 	width: auto;
 
@@ -1950,14 +1948,11 @@ tr.nocellnopadd td.nobordernopadding, tr.nocellnopadd td.nocellnopadd
 .notopnoleftnoright {
 	border-collapse: collapse;
 	border: 0px;
-	padding-top: 0px;
-	padding-left: 0px;
-	padding-right: 0px;
-	padding-bottom: 4px;
-	margin: 0px 0px 0px 0px;
+	padding: 0 0 4px 0;
+	margin: 0;
 }
 
-
+td > img {padding:5px}
 table.border, table.dataTable, .table-border, .table-border-col, .table-key-border-col, .table-val-border-col, div.border {
 	border: 1px solid #E0E0E0;
 	border-collapse: collapse !important;
@@ -1969,7 +1964,8 @@ table.borderplus {
 .border tbody tr, .border tbody tr td {
 	height: 20px;
 }
-div.tabBar table.border tr, div.tabBar table.border tr td, div.tabBar div.border .table-border-row, div.tabBar div.border .table-key-border-col, div.tabBar div.border .table-val-border-col {
+div.tabBar table.border tr, div.tabBar table.border tr td, div.tabBar div.border .table-border-row,
+div.tabBar div.border .table-key-border-col, div.tabBar div.border .table-val-border-col {
 	height: 20px;
 }
 div.tabBar div.border .table-border-row, div.tabBar div.border .table-key-border-col, div.tabBar .table-val-border-col {
@@ -1988,12 +1984,10 @@ table.border td, div.border div div.tagtd {
 }
 
 td.border, div.tagtable div div.border {
-	border-top: 1px solid #000000;
-	border-right: 1px solid #000000;
-	border-bottom: 1px solid #000000;
-	border-left: 1px solid #000000;
+	border: 1px solid #000000;
 }
 
+td textarea.flat, td input.flat {margin-top:7px;}
 .table-key-border-col {
 	/* width: 25%; */
 	vertical-align:top;
@@ -2006,26 +2000,9 @@ td.border, div.tagtable div div.border {
 
 table.liste, table.noborder, table.formdoc, div.noborder {
 	width: 100%;
-
 	border-collapse: separate !important;
 	border-spacing: 0px;
-
-	border-top-width: 1px;
-	border-top-color: #BBB;
-	border-top-style: solid;
-
-	border-right-width: 1px;
-	border-right-color: #BBB;
-	border-right-style: solid;
-
-	border-left-width: 1px;
-	border-left-color: #BBB;
-	border-left-style: solid;
-
-	border-bottom-width: 1px;
-	border-bottom-color: #BBB;
-	border-bottom-style: solid;
-	
+	border: 1px #BBB solid;
 	margin: 0px 0px 5px 0px;
 
 	-moz-box-shadow: 2px 2px 4px #CCC;
@@ -2040,21 +2017,16 @@ table.liste, table.noborder, table.formdoc, div.noborder {
 table.liste tr, table.noborder tr, div.noborder form {
 	border-top-color: #FEFEFE;
 
-	border-right-width: 1px;
-	border-right-color: #BBB;
-	border-right-style: solid;
-
-	border-left-width: 1px;
-	border-left-color: #BBB;
-	border-left-style: solid;
+	border-right: 1px #BBB solid;
+	border-left: 1px #BBB solid;
 	min-height: 20px;
 }
 
 table.liste th, table.noborder th {
-	padding: 10px 2px 10px 3px;			/* t r b l */
+	padding: 10px 5px 10px 7px;			/* t r b l */
 }
 table.liste td, table.noborder td, div.noborder form, div.noborder form div {
-	padding: 5px 2px 5px 3px;			/* t r b l */
+	padding:5px 10px;			/* t r b l */
 }
 
 table.nobordernopadding {
@@ -2322,7 +2294,7 @@ table.dataTable td {
     padding: 5px 2px 5px 3px !important;
 }
 tr.even td, tr.pair td, tr.odd td, tr.impair td, form.odd div.tagtd, form.impair div.tagtd, form.pair div.tagtd, div.impair div.tagtd, div.pair div.tagtd, div.liste_titre div.tagtd {
-    padding: 5px 2px 5px 3px;
+    padding: 5px;
     border-bottom: 1px solid #ddd;
 }
 tr.even td .nobordernopadding tr td, tr.pair td .nobordernopadding tr td, tr.impair td .nobordernopadding tr td, tr.odd td .nobordernopadding tr td {
@@ -3861,13 +3833,13 @@ border-top-right-radius: 6px;
 	div.tmenuleft {
 		display: none;
 	}
-	
+
 	.imgopensurveywizard { width:95%; height: auto; }
-	
+
 	#tooltip {
 		position: absolute;
 		width: <?php print dol_size(350,'width'); ?>px;
-	}	
+	}
 }
 @media only screen and (max-width: 570px)
 {
@@ -3877,11 +3849,11 @@ border-top-right-radius: 6px;
 	.topmenuimage {
     	background-size: 20px auto;
     }
-    
+
 	#tooltip {
 		position: absolute;
 		width: <?php print dol_size(300,'width'); ?>px;
-	}	
+	}
 }
 
 

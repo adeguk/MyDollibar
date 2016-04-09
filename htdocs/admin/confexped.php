@@ -123,11 +123,11 @@ print '<td align="center" width="100">';
 
 if (empty($conf->global->MAIN_SUBMODULE_EXPEDITION))
 {
-	print '<a href="confexped.php?action=activate_sending">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+	print '<a href="confexped.php?action=activate_sending">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 }
 else
 {
-	print '<a href="confexped.php?action=disable_sending">'.img_picto($langs->trans("Enabled"),'switch_on').'</a>';
+	print '<a href="confexped.php?action=disable_sending">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 }
 
 print "</td>";
@@ -143,11 +143,11 @@ print '<td align="center" width="100">';
 
 if (empty($conf->global->MAIN_SUBMODULE_LIVRAISON))
 {
-	print '<a href="confexped.php?action=activate_delivery">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+	print '<a href="confexped.php?action=activate_delivery">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 }
 else
 {
-	print '<a href="confexped.php?action=disable_delivery">'.img_picto($langs->trans("Enabled"),'switch_on').'</a>';
+	print '<a href="confexped.php?action=disable_delivery">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
 }
 
 print "</td>";

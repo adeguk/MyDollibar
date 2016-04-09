@@ -329,12 +329,12 @@ foreach ($dirmodels as $reldir)
 						print '<td align="center">';
 						if ($conf->global->COMMANDE_ADDON == $file)
 						{
-							print img_picto($langs->trans("Activated"),'switch_on');
+							print '<i class="fa fa-toggle-on" title="Activited"></i>';
 						}
 						else
 						{
 							print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&amp;value='.$file.'">';
-							print img_picto($langs->trans("Disabled"),'switch_off');
+							print '<i class="fa fa-toggle-off" title="Disabled"></i>';
 							print '</a>';
 						}
 						print '</td>';
@@ -466,14 +466,14 @@ foreach ($dirmodels as $reldir)
 	                            {
 	                            	print '<td align="center">'."\n";
 	                            	print '<a href="'.$_SERVER["PHP_SELF"].'?action=del&value='.$name.'">';
-	                            	print img_picto($langs->trans("Enabled"),'switch_on');
+	                            	print '<i class="fa fa-toggle-on" title="Enabled"></i>';
 	                            	print '</a>';
 	                            	print '</td>';
 	                            }
 	                            else
 	                            {
 	                                print '<td align="center">'."\n";
-	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	                                print "</td>";
 	                            }
 
@@ -485,7 +485,7 @@ foreach ($dirmodels as $reldir)
 	                            }
 	                            else
 	                            {
-	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoc&value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoc&value='.$name.'&amp;scandir='.$module->scandir.'&amp;label='.urlencode($module->name).'" alt="'.$langs->trans("Default").'">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
 	                            }
 	                            print '</td>';
 
@@ -592,10 +592,10 @@ print '<td>&nbsp</td>';
 print '<td align="center">';
 if (!empty($conf->global->SHIPPABLE_ORDER_ICON_IN_LIST)) {
     print '<a href="'.$_SERVER['PHP_SELF'].'?action=setshippableiconinlist&value=0">';
-    print img_picto($langs->trans("Activated"),'switch_on');
+    print '<i class="fa fa-toggle-on" title="Activited"></i>';
 } else {
     print '<a href="'.$_SERVER['PHP_SELF'].'?action=setshippableiconinlist&value=1">';
-    print img_picto($langs->trans("Disabled"),'switch_off');
+    print '<i class="fa fa-toggle-off" title="Disabled"></i>';
 }
 print '</a></td>';
 print '</tr>';
@@ -614,11 +614,11 @@ if ($conf->banque->enabled)
     {
         if (empty($conf->global->BANK_ASK_PAYMENT_BANK_DURING_ORDER))
         {
-            print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_BANK_ASK_PAYMENT_BANK_DURING_ORDER&amp;value=1">'.img_picto($langs->trans("Disabled"),'switch_off').'</a>';
+            print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_BANK_ASK_PAYMENT_BANK_DURING_ORDER&amp;value=1">'.'<i class="fa fa-toggle-off" title="Disabled"></i>'.'</a>';
         }
         else
         {
-            print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_BANK_ASK_PAYMENT_BANK_DURING_ORDER&amp;value=0">'.img_picto($langs->trans("Enabled"),'switch_on').'</a>';
+            print '<a href="'.$_SERVER['PHP_SELF'].'?action=set_BANK_ASK_PAYMENT_BANK_DURING_ORDER&amp;value=0">'.'<i class="fa fa-toggle-on" title="Enabled"></i>'.'</a>';
         }
     }
     print '</td></tr>';
